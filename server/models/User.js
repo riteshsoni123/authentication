@@ -15,9 +15,29 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  date: {
-    type: Date,
-    default: Date.now,
+  age: {
+    type: Number,
+    required: false,
+  },
+  gender: {
+    type: String,
+    required: false,
+  },
+  college: {
+    type: String,
+    required: false,
+  },
+  branch: {
+    type: String,
+    required: false,
+  },
+  year: {
+    type: Number,
+    required: false,
+  },
+  profession: {
+    type: String,
+    required: false,
   },
 });
 
