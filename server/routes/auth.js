@@ -109,4 +109,40 @@ router.post("/getuser", fetchuser, async (req, res) => {
   }
 });
 
+router.put("/editprofile/:id", fetchuser, async (req, res) => {
+  const { age, gender, college, branch, year, profession } = req.body;
+  const updatedProfile = {};
+
+  if (age) {
+    updatedProfile.age = age;
+  }
+  if (gender) {
+    updatedProfile.gender = gender;
+  }
+  if (college) {
+    updatedProfile.college = college;
+  }
+  if (branch) {
+    updatedProfile.branch = branch;
+  }
+  if (year) {
+    updatedProfile.year = year;
+  }
+  if (profession) {
+    updatedProfile.profession = profession;
+  }
+  userId = req.user.id;
+  let user = await User.findOne(userId);
+  if (!user) {
+    return res.status(404).send("Not Found");
+  }
+
+  user = await User.findByIdAndUpdate(
+    req.params.id,
+    { $set: updatedProfile },
+    { new: true }
+  ).select("-password");
+  res.json({ user });
+});
+
 module.exports = router;
